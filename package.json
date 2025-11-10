@@ -7,14 +7,17 @@
 	"scripts": {
 		"dev": "bun --watch src/server.ts",
 		"start": "bun src/server.ts",
-		"format": "biome check --write"
+		"format": "biome check --write",
+		"lint": "biome check",
+		"prepare": "husky"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
 		"@biomejs/biome": "2.3.4",
-		"@types/bun": "latest"
+		"@types/bun": "latest",
+		"husky": "^9.1.7"
 	},
 	"dependencies": {
 		"@fastify/cors": "^11.1.0",
