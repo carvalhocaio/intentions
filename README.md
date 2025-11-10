@@ -13,6 +13,7 @@ documentation, type-safe validation, and code formatting out of the box.
 - **Code Formatting**: Integrated Biome for fast linting and formatting
 - **Hot Reload**: Development mode with automatic restart on file changes
 - **CORS**: Pre-configured CORS support
+- **Git Hooks**: Husky integration for pre-commit linting and validation
 
 ## Prerequisites
 
@@ -50,6 +51,8 @@ The server will start on `http://localhost:3333` with hot reload enabled.
 | `bun run dev` | Start development server with hot reload |
 | `bun run start` | Start production server |
 | `bun run format` | Format and lint code with Biome |
+| `bun run lint` | Lint code with Biome (no auto-fix) |
+| `bun run prepare` | Install Husky git hooks |
 
 ## API Documentation
 
@@ -155,6 +158,27 @@ await app.register(fastifySwagger, {
 })
 ```
 
+## Git Hooks
+
+This project uses Husky to manage Git hooks. The following hooks are configured:
+
+### Pre-commit
+
+Before each commit, the following check is automatically executed:
+- **Linting**: Runs `bun run lint` to check code quality
+
+The hooks are automatically installed when you run `bun install` (via the `prepare` script).
+
+## CI/CD
+
+This project includes a GitHub Actions workflow that runs on:
+- Push to `main` branch
+- Pull requests targeting `main` branch
+
+The workflow performs:
+1. **Linting**: Validates code quality with Biome
+2. **Server Validation**: Ensures the application can start without errors
+
 ## Dependencies
 
 ### Runtime
@@ -168,6 +192,7 @@ await app.register(fastifySwagger, {
 ### Development
 - **@biomejs/biome**: Fast formatter and linter
 - **@types/bun**: TypeScript definitions for Bun
+- **husky**: Git hooks for pre-commit validation
 
 ## Contributing
 
